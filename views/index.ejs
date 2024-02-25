@@ -1,0 +1,82 @@
+<%- include('partials/header.ejs'); -%>
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light">Welcome to Have you read it? :)</h1>
+                <p class="lead text-body-secondary">This website is created by readers for readers. Here you can share your review of a book so others that are wondering if they should read that book or not, can take the decision easily!</p>
+                <p>
+                    <div>
+                        <form action="/new" method="post">
+                            <button type="submit" class="btn btn-success">Add your Review!</button>
+                        </form>
+                    </div>
+                </p>
+            </div>
+        </div>
+    </section>
+    <h3 class="container">Take a look at our reviews!</h3>
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <% for(let book of books){%>
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <img id="cover<%=book.id%>" class="bookCover container bd-placeholder-img card-img-top" src="https://covers.openlibrary.org/b/OLID/<%=book.olid%>-L.jpg" alt="Cover of the Book"> 
+                            <div class="card-body">
+                                <p id="title<%=book.id%>" class="card-title">
+                                    <%= book.bookname %>
+                                </p>
+                                <p class="card-text" id="review<%=book.id%>"><%= book.review %></p>
+                                <div class="input-group mb-3">
+                                    <form class="edit" action="/edit" method="post">
+                                        <input type="hidden" name="updatedBookId" value="<%= book.id %>">
+                                        <input id="inputcover<%=book.id%>" type="text" name="updatedCoverId" value="<%= book.olid %>" autocomplete="off"
+                                        autofocus="true" hidden="true" />
+                                        <input id="inputname<%=book.id%>" type="text" name="updatedBookName" value="<%= book.bookname %>" autocomplete="off"
+                                        autofocus="true" hidden="true" />
+                                        <input id="inputreview<%=book.id%>" type="text" name="updatedBookReview" value="<%= book.review %>" autocomplete="off"
+                                        autofocus="true" hidden="true" />
+                                        <input id="inputuser<%=book.id%>" type="text" name="updatedUserName" value="<%= book.username %>" autocomplete="off"
+                                        autofocus="true" hidden="true" />
+                                        <button id="done<%=book.id%>" class="edit" type="submit" hidden><img class="icon"
+                                        src="/icons/check-solid.svg" alt="tick image"></button>
+                                    </form>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <div>
+                                            <button id="edit<%=book.id%>" class="edit btn btn-sm btn-outline-secondary" onclick="handler('<%=book.id%>')"><img class="icon"
+                                            src="/icons/pencil-solid.svg" alt="pencil image"></button>
+                                        </div>
+                                        <form action="/delete" method="post" id="delete<%=book.id%>">
+                                            <button type="submit" class="btn btn-sm btn-outline-secondary" onclick="this.form.submit()" name="deleteBookId" value="<%= book.id %>"><img src="/icons/trash.svg" alt="trashcan icon" class="trash-icon"></button>
+                                        </form>
+                                    </div>
+                                    <small class="text-body-secondary" id="user<%=book.id%>"><%= book.username %></small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <%}%>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+    function handler(id) {
+        document.getElementById("cover" + id).parentNode.removeChild(document.getElementById("cover" + id));
+        document.getElementById("title" + id).parentNode.removeChild(document.getElementById("title" + id));
+        document.getElementById("review" + id).parentNode.removeChild(document.getElementById("review" + id));
+        document.getElementById("user" + id).parentNode.removeChild(document.getElementById("user" + id));
+        document.getElementById("edit" + id).parentNode.removeChild(document.getElementById("edit" + id));
+        document.getElementById("delete" + id).parentNode.removeChild(document.getElementById("delete" + id));
+        document.getElementById("done" + id).removeAttribute("hidden")
+        document.getElementById("inputcover" + id).removeAttribute("hidden")
+        document.getElementById("inputname" + id).removeAttribute("hidden")
+        document.getElementById("inputreview" + id).removeAttribute("hidden")
+        document.getElementById("inputuser" + id).removeAttribute("hidden")
+    }
+    </script>
+<%- include('partials/footer.ejs'); -%>
+  

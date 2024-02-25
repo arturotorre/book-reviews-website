@@ -1,0 +1,27 @@
+
+.edit{
+    width: 30px;
+}
+
+.bookCover{
+    width:60%;
+    text-align: justify;
+}
+
+.card-title{
+    font-weight:bold;
+    font-size: large;
+}
+
+.trash-icon{
+    width: 17px;
+}
+.booksvg{
+    width: 25px;
+    height: 25px;
+    margin-right: 8px;
+}
+footer{
+    margin-top: 50px;
+    margin-bottom: 10px;
+}

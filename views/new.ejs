@@ -1,0 +1,40 @@
+<%- include('partials/header.ejs') %>
+    <div class="container">
+        <div class="py-5 text-center">
+            <img class="d-block mx-auto mb-4" src="/icons/book.svg" alt="" width="72" height="57">
+            <h1>Add a new book review</h1>
+            <p class="lead">Please fill the information requested in the form below in order to create a new review!</p>
+        </div>
+        <div class="row g-5">
+            <div class="col-md-7 col-lg-8">
+                <h4 class="mb-3">New book review:</h4>
+                <form class="needs-validation" action="/add" method="post">
+                    <div class="col-12">
+                        <label class="form-label">Title</label>
+                        <input type="text" name="newTitle" class="form-control" placeholder="Enter the Book's title">
+                    </div>
+                    <div class="col-12">
+                        <label class="col-form-label" >Your Review:</label>
+                        <input type="text" name="newReview" class="form-control" placeholder="Enter your review">
+                    </div>
+                    <div class="col-12">
+                        <label class="col-form-label">
+                            OLID #: <span class="text-body-secondary">
+                                This ID helps us to retrieve the Book Cover (You can look for the OLID # at the <a href="https://openlibrary.org/" class="text-reset">Open Library Website</a>)</span>
+                            </label>
+                        <input type="text" name="newOLID" class="form-control" placeholder="Enter the book's OLID #">
+                    </div>
+                    <div class="col-12">
+                        <label class="col-form-label" >Your name:</label>
+                        <input type="text" name="newUser" class="form-control" placeholder="Enter your name/username">
+                    </div>
+                    <p>
+                        <div>
+                            <button type="submit" class="btn btn-success">Submit Review</button>
+                        </div>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+<%- include('partials/footer.ejs') %>
